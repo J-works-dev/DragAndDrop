@@ -7,45 +7,56 @@
 package draganddrop;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class DragAndDrop extends Application {
 
-    ArrayList<ToDoList> toDoList = new ArrayList<ToDoList>();
-    ArrayList<DoneList> doneList = new ArrayList<DoneList>();
+    ArrayList<TextField> toDoList = new ArrayList<TextField>();
+    ArrayList<TextField> doneList = new ArrayList<TextField>();
     
     @Override
     public void start(Stage stage) {
         stage.setTitle("J-works To Do List");
 
         SplitPane splitPane = new SplitPane();
-
+        
         VBox leftControl  = new VBox();
         Label leftTitle = new Label("To Do List");
         leftTitle.setScaleX(2.0);
         leftTitle.setScaleY(2.0);
         leftControl.getChildren().add(leftTitle);
+        leftControl.setAlignment(Pos.TOP_CENTER);
         
         VBox rightControl = new VBox();
         Label rightTitle = new Label("Done List");
         rightTitle.setScaleX(2.0);
         rightTitle.setScaleY(2.0);
         rightControl.getChildren().add(rightTitle);
+        rightControl.setAlignment(Pos.TOP_CENTER);
         splitPane.getItems().addAll(leftControl, rightControl);
 
-        Scene scene = new Scene(splitPane, 600, 500);
+        Scene scene = new Scene(splitPane, 800, 500);
 //        Group root = new Group();
 //        Scene scene = new Scene(root, 600, 500);
 //        scene.setFill(Color.LIGHTGREEN);
@@ -53,15 +64,20 @@ public class DragAndDrop extends Application {
         TextField getList = new TextField();
         Button buttonAdd = new Button("ADD");
         
-
+        buttonAdd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String list = getList.getText();
+                System.out.println(list);
+                toDoList.add(new TextField(list));
+            }
+        });
+        if (toDoList.size() > 0) {
+            for (int i = 0; i < toDoList.size(); i++) {
+                leftControl.getChildren().add(toDolist.get(i));
+            }
+        }
         
-        final Text source = new Text(50, 100, "DRAG ME");
-        source.setScaleX(2.0);
-        source.setScaleY(2.0);
-
-        final Text target = new Text(250, 100, "DROP HERE");
-        target.setScaleX(2.0);
-        target.setScaleY(2.0);
 
         source.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
