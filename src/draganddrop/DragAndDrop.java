@@ -34,12 +34,15 @@ public class DragAndDrop extends Application {
 
         VBox leftControl  = new VBox();
         Label leftTitle = new Label("To Do List");
-        leftTitle.setFont(new Font("Arial", 15));
+        leftTitle.setScaleX(2.0);
+        leftTitle.setScaleY(2.0);
         leftControl.getChildren().add(leftTitle);
         
-//        leftControl.setMargin(new Insets(10, 10, 10, 10));
-        VBox rightControl = new VBox(new Label("Done List"));
-
+        VBox rightControl = new VBox();
+        Label rightTitle = new Label("Done List");
+        rightTitle.setScaleX(2.0);
+        rightTitle.setScaleY(2.0);
+        rightControl.getChildren().add(rightTitle);
         splitPane.getItems().addAll(leftControl, rightControl);
 
         Scene scene = new Scene(splitPane, 600, 500);
@@ -49,6 +52,8 @@ public class DragAndDrop extends Application {
 
         TextField getList = new TextField();
         Button buttonAdd = new Button("ADD");
+        
+
         
         final Text source = new Text(50, 100, "DRAG ME");
         source.setScaleX(2.0);
@@ -154,6 +159,8 @@ public class DragAndDrop extends Application {
         });
 
         leftControl.getChildren().add(source);
+        leftControl.getChildren().add(getList);
+        leftControl.getChildren().add(buttonAdd);
         rightControl.getChildren().add(target);
         stage.setScene(scene);
         stage.show();
