@@ -84,9 +84,9 @@ public class DragAndDrop extends Application {
             }
         });
         if (toDoList.size() > 0) {
-            for (int i = 2; i < toDoList.size() + 2; i++) {
+            for (int i = 0; i < toDoList.size(); i++) {
 //                leftControl.getChildren().add(toDolist.get(i));
-                leftGrid.add(toDoList.get(i), 0, i);
+                leftGrid.add(toDoList.get(i), 0, i + 2);
             }
         }
         final Text source = toDoList.get(0);
